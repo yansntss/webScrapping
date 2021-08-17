@@ -1,6 +1,11 @@
 const puppeteer = require("puppeteer");
 const express = require("express");
 const app = express();
+const fs = require('fs')
+
+
+
+
 
 app.get("/", async (request, response) => {
   console.log("entrou");
@@ -8,18 +13,19 @@ app.get("/", async (request, response) => {
   const page = await browser.newPage();
   page.setDefaultNavigationTimeout(0);
 
-  //const champList = 1;
-  //const count = 2;
   var arrayChamps = [];
-  for (let i = 1; i < 50; i++) {
+
+  for (let i = 1; i < 3; i++) {
     console.log("entrou no for");
     await page.goto("https://br.op.gg/champion/statistics");
+
     await page.click(
       `div:nth-child(${[i]}) > a > div.champion-index__champion-item__name`
-    ); // erro champ aphelios
+    );
+
     //esperar alguns segundos
     await new Promise((resolve) =>
-      setTimeout(() => resolve(), 20000, console.log("espere"))
+      setTimeout(() => resolve(), 10000, console.log("espere"))
     );
 
     const pageContent = await page.evaluate(() => {
@@ -34,16 +40,12 @@ app.get("/", async (request, response) => {
             "tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(9) > span"
           ).innerHTML,
           secoundSkill: document.querySelector(
-            "tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(13) > span"
-          ).innerHTML,
+            " tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(13)"
+          ).innerText,
           thirdskill: document.querySelector(
-            " tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(14)"
+            " tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(15)"
           ).innerText,
         },
-        //items inicial
-        // starterItems : {
-
-        // }
       };
 
       return infoChamp;
@@ -56,7 +58,9 @@ app.get("/", async (request, response) => {
   response.send({
     arrayChamps,
   });
-
+  fs.writeFile(__dirname + '/champLOL.json', JSON.stringify(arrayChamps), err => {
+    console.log(err || "arquivo salvo! ")
+  })
   //console.log("entrou");
 });
 

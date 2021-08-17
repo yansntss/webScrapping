@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Aatrox Masters",
+    "skills": { "firtSkill": "Q", "secoundSkill": "E", "thirdskill": "W" }
+  },
+  {
+    "name": "Ahri Masters",
+    "skills": { "firtSkill": "Q", "secoundSkill": "W", "thirdskill": "E" }
+  }
+]
