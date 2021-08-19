@@ -1,10 +1,42 @@
 [
   {
-    "name": "Aatrox Masters",
-    "skills": { "firtSkill": "Q", "secoundSkill": "E", "thirdskill": "W" }
+    "name": "Posição do Invocador Aatrox",
+    "skills": {
+      "firtSkill": "Q",
+      "secoundSkill": "E",
+      "thirdskill": "W"
+    }
   },
   {
-    "name": "Ahri Masters",
-    "skills": { "firtSkill": "Q", "secoundSkill": "W", "thirdskill": "E" }
+    "name": "Posição do Invocador Ahri",
+    "skills": {
+      "firtSkill": "Q",
+      "secoundSkill": "W",
+      "thirdskill": "E"
+    }
+  },
+  {
+    "name": "Posição do Invocador Akali",
+    "skills": {
+      "firtSkill": "Q",
+      "secoundSkill": "E",
+      "thirdskill": "W"
+    }
+  },
+  {
+    "name": "Posição do Invocador Akshan",
+    "skills": {
+      "firtSkill": "E",
+      "secoundSkill": "Q",
+      "thirdskill": "W"
+    }
+  },
+  {
+    "name": "Posição do Invocador Alistar",
+    "skills": {
+      "firtSkill": "Q",
+      "secoundSkill": "W",
+      "thirdskill": "E"
+    }
   }
 ]
