@@ -13,7 +13,7 @@ app.get("/", async (request, response) => {
   var arrayChamps = [];
   //156 champs no lol ate o dia 19/08/2021
   //pegar a quantidade de champ de forma dinamica
-  for (let i = 1; i < 157; i++) {
+  for (let i = 1; i < 3; i++) {
     console.log("Champ -> " + [i]);
     await page.goto("https://br.op.gg/champion/statistics");
 
@@ -28,14 +28,13 @@ app.get("/", async (request, response) => {
 
     const pageContent = await page.evaluate(() => {
       // console.log("entrou no pageContent");
-    
-        //Alguns champs upam a segunda e terceira skill, em level diferente. [resolvido]
-        //criar uma resolução para quando der, pegar a skill-level mais prox.
-        //erro ao pesquisar o nome do champ, em alguns champs o campo nao existe -> critico
-      const infoChamp = {
-        name: document.querySelector("div.champion-box-header__title > h4")
-          .innerHTML,
 
+      //Alguns champs upam a segunda e terceira skill, em level diferente. [resolvido]
+      //criar uma resolução para quando der, pegar a skill-level mais prox.[analizando a viabilidade...]
+      //erro ao pesquisar o nome do champ, em alguns champs o campo nao existe -> critico [resolvido]
+      const infoChamp = {
+        name: document.querySelector("div.champion-stats-header-info.champion-stats-header-info--tier-2 > h1"
+        ).firstChild.data,
         skills: {
           firtSkill: document.querySelector(
             "tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(9) " || "tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(9) > span"
