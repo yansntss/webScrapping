@@ -1,10 +1,10 @@
 [
   {
-    "name": "Aatrox ",
+    "name": "aatrox",
     "skills": { "firtSkill": "Q", "secoundSkill": "E", "thirdskill": "W" }
   },
   {
-    "name": "Ahri ",
+    "name": "ahri",
     "skills": { "firtSkill": "Q", "secoundSkill": "W", "thirdskill": "E" }
   }
 ]
