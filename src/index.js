@@ -1,11 +1,7 @@
 const puppeteer = require("puppeteer");
 const express = require("express");
 const app = express();
-const fs = require('fs')
-
-
-
-
+const fs = require("fs");
 
 app.get("/", async (request, response) => {
   console.log("entrou");
@@ -14,9 +10,11 @@ app.get("/", async (request, response) => {
   page.setDefaultNavigationTimeout(0);
 
   var arrayChamps = [];
-//157 champs  
-  for (let i = 1; i < 157; i++) {
-    console.log("entrou no for");
+  //156 champs no lol ate o dia 19/08/2021 ..
+  //pegar a quantidade de champ de forma dinamica
+  for (let i = 1; i < 3; i++) {
+    console.log("Champ -> " + [i]);
+
     await page.goto("https://br.op.gg/champion/statistics");
 
     await page.click(
@@ -25,25 +23,31 @@ app.get("/", async (request, response) => {
 
     //esperar alguns segundos
     await new Promise((resolve) =>
-      setTimeout(() => resolve(), 10000, console.log("espere"))
+      setTimeout(() => resolve(), 10000, console.log("aguarde..."))
     );
 
     const pageContent = await page.evaluate(() => {
-      console.log("entrou no pageContent");
-      const infoChamp = {
-        name: document.querySelector("div.champion-box-header__title > h4")
-          .innerHTML,
+      // console.log("entrou no pageContent");
 
-        //ordem de up das skills
+      //Alguns champs upam a segunda e terceira skill, em level diferente. [resolvido]
+      //criar uma resolução para quando der, pegar a skill-level mais prox.[analizando a viabilidade...]
+      //erro ao pesquisar o nome do champ, em alguns champs o campo nao existe -> critico [resolvido]
+      const infoChamp = {
+        name: document.querySelector(
+          "div.champion-stats-header-info.champion-stats-header-info--tier-2 > h1"
+        ).firstChild.data,
         skills: {
           firtSkill: document.querySelector(
-            "tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(9) > span"
-          ).innerHTML,
+            "tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(9) " ||
+              "tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(9) > span"
+          ).innerText,
           secoundSkill: document.querySelector(
-            " tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(13)"
+            " tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(10)" ||
+              "tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(10) > span"
           ).innerText,
           thirdskill: document.querySelector(
-            " tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(15)"
+            " tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(15)" ||
+              "tbody:nth-child(5) > tr > td.champion-overview__data > table > tbody > tr:nth-child(2) > td:nth-child(15) > span"
           ).innerText,
         },
       };
@@ -58,9 +62,13 @@ app.get("/", async (request, response) => {
   response.send({
     arrayChamps,
   });
-  fs.writeFile(__dirname + '/champLOL.json', JSON.stringify(arrayChamps), err => {
-    console.log(err || "arquivo salvo! ")
-  })
+  fs.writeFile(
+    __dirname + "/champLOL.json",
+    JSON.stringify(arrayChamps),
+    (err) => {
+      console.log(err || "arquivo salvo! ");
+    }
+  );
   //console.log("entrou");
 });
 
