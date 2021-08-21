@@ -14,8 +14,8 @@ app.get("/", async (request, response) => {
   page.setDefaultNavigationTimeout(0);
 
   var arrayChamps = [];
-
-  for (let i = 1; i < 3; i++) {
+//157 champs  
+  for (let i = 1; i < 157; i++) {
     console.log("entrou no for");
     await page.goto("https://br.op.gg/champion/statistics");
 
