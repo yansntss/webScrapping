@@ -1,1 +1,18 @@
-[{"name":"Aatrox ","skills":{"firtSkill":"Q","secoundSkill":"E","thirdskill":"W"}},{"name":"Ahri ","skills":{"firtSkill":"Q","secoundSkill":"W","thirdskill":"E"}}]
+[
+  {
+    "name": "Aatrox ",
+    "skills": {
+      "firtSkill": "Q",
+      "secoundSkill": "E",
+      "thirdskill": "w"
+    }
+  },
+  {
+    "name": "Ahri ",
+    "skills": {
+      "firtSkill": "Q",
+      "secoundSkill": "W",
+      "thirdskill": "e"
+    }
+  }
+]
