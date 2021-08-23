@@ -12,7 +12,7 @@ app.get("/", async (request, response) => {
   var arrayChamps = [];
   //156 champs no lol ate o dia 19/08/2021 ..
   //pegar a quantidade de champ de forma dinamica
-  for (let i = 1; i <= 2; i++) {
+  for (let i = 1; i <= 156; i++) {
     console.log("Champ -> " + [i]);
 
     await page.goto("https://br.op.gg/champion/statistics");
